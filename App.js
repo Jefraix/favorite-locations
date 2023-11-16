@@ -13,26 +13,23 @@ export default function App() {
       <StatusBar style='dark'/>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name='AllPlaces' component={AllPlaces} />
+          <Stack.Screen 
+            name='AllPlaces' 
+            component={AllPlaces} 
+            options={({ navigation }) => ({
+              headerRight: ({tintColor}) => (
+                <IconButton 
+                  icon='add' 
+                  size={24} 
+                  color={tintColor} 
+                  onPress={() => navigation.navigate('AddPlace')}
+                />
+              )}
+            )}
+          />
           <Stack.Screen name='AddPlace' component={AddPlace} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
   );
-
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

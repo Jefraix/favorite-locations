@@ -1,8 +1,28 @@
-import { View } from "react-native";
-import { launchCameraAsync } from 'expo-image-picker';
+import { Alert, View, Button } from "react-native";
+import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker';
 
 const ImagePicker = () => {
+  const [cameraPermissionInformation, requestPermission] = useCameraPermissions();
+
+  const verifyPermissions = async () => {
+    if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
+      const permissionResponse = await requestPermission();
+
+      return permissionResponse.granted;
+    }
+
+    if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
+      Alert.alert('Insufficient Permissions!', 'You need to grant camera permissions to use this app.')
+    }
+  }
+
   const takeImageHandler = async () => {
+    const hasPermission = await verifyPermissions();
+
+    if (!hasPermission) {
+      return;
+    }
+
     const image = await launchCameraAsync({
       allowsEditing: true,
       aspect: [16, 9],

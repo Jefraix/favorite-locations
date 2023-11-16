@@ -19,6 +19,7 @@ const PlaceForm = () => {
           value={enteredTitle}
          />
       </View>
+      <ImagePicker />
     </ScrollView>
   );
 };

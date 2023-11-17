@@ -4,6 +4,7 @@ import { Colors } from "../../constants/colors";
 
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
+import Button from "../UI/Button"
 
 const PlaceForm = () => {
   const [enteredTitle, setEnteredTitle] = useState("");

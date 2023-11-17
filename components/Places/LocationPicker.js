@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert, Image } from "react-native";
+import { View, StyleSheet, Alert, Text, Image } from "react-native";
 import {
   getCurrentPositionAsync,
   useForegroundPermissions,
@@ -13,6 +13,8 @@ import {
   useRoute,
   useIsFocused,
 } from "@react-navigation/native";
+
+import { getMapPreview } from '../../util/location'
 
 const LocationPicker = ({ onPickLocation }) => {
   const [pickedLocation, setPickedLocation] = useState();
@@ -39,6 +41,11 @@ const LocationPicker = ({ onPickLocation }) => {
   }, [pickedLocation, onPickLocation]);
 
   const verifyPermissions = async () => {
+
+    if (locationPermissionInformation.status === PermissionStatus.GRANTED){
+      return true;
+    }
+
     if (
       locationPermissionInformation.status === PermissionStatus.UNDETERMINED
     ) {
@@ -52,7 +59,9 @@ const LocationPicker = ({ onPickLocation }) => {
         "Insufficient Permissions!",
         "You need to grant location permissions to use this app."
       );
+      return false;
     }
+
   };
 
   const getLocationHandler = async () => {
@@ -67,6 +76,7 @@ const LocationPicker = ({ onPickLocation }) => {
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
+    
   };
 
   const pickOnMapHandler = () => {

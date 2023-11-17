@@ -1,8 +1,8 @@
-const GOOGLE_API_KEY = "LOLEILO";
+const GOOGLE_API_KEY = "AIzaSyD4hW6A7tCfas6wYn38AKulNWskuW7t-mQ";
 
-const MAP_PREVIEW_BASE_URL = "https://google.api/maps/api/staticmap?";
+const MAP_PREVIEW_BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?";
 
-const getMapPreview = (lat, lng) => {
+export const getMapPreview = (lat, lng) => {
   const zoom = 14;
 
   const width = 400;
@@ -11,9 +11,10 @@ const getMapPreview = (lat, lng) => {
   const imagePreviewURL =
     MAP_PREVIEW_BASE_URL +
     `center=${lat},${lng}` +
-    `&zoom=${14}` +
+    `&zoom=${zoom}` +
     `&size=${width}x${height}` +
-    `&maptype=roadmap` +
     `&markers=color:red%7Clabel:S%7C${lat},${lng}` +
     `&key=${GOOGLE_API_KEY}`;
+
+  return imagePreviewURL
 };

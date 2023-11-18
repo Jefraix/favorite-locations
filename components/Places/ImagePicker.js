@@ -15,6 +15,11 @@ const ImagePicker = ({ onTakeImage }) => {
     useCameraPermissions();
 
   const verifyPermissions = async () => {
+
+    if (cameraPermissionInformation.status === PermissionStatus.GRANTED){
+      return true;
+    }
+
     if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
       const permissionResponse = await requestPermission();
 
@@ -26,6 +31,7 @@ const ImagePicker = ({ onTakeImage }) => {
         "Insufficient Permissions!",
         "You need to grant camera permissions to use this app."
       );
+      return false;
     }
   };
 
